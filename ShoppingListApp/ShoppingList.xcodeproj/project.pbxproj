@@ -12,6 +12,7 @@
 		183BECE82F2D583600409142 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183BECE72F2D583600409142 /* Assets.xcassets */; };
 		183BECEB2F2D583600409142 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183BECEA2F2D583600409142 /* Preview Assets.xcassets */; };
 		183BECF22F2D65CE00409142 /* CalculateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183BECF12F2D65CE00409142 /* CalculateView.swift */; };
+		186F5CB12F354F020055E114 /* AddProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186F5CB02F354F020055E114 /* AddProductsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		183BECE72F2D583600409142 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		183BECEA2F2D583600409142 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		183BECF12F2D65CE00409142 /* CalculateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateView.swift; sourceTree = "<group>"; };
+		186F5CB02F354F020055E114 /* AddProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				183BECE32F2D583400409142 /* ShoppingListApp.swift */,
 				183BECE52F2D583400409142 /* ContentView.swift */,
+				186F5CB02F354F020055E114 /* AddProductsView.swift */,
 				183BECF12F2D65CE00409142 /* CalculateView.swift */,
 				183BECE72F2D583600409142 /* Assets.xcassets */,
 				183BECE92F2D583600409142 /* Preview Content */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186F5CB12F354F020055E114 /* AddProductsView.swift in Sources */,
 				183BECE62F2D583400409142 /* ContentView.swift in Sources */,
 				183BECF22F2D65CE00409142 /* CalculateView.swift in Sources */,
 				183BECE42F2D583400409142 /* ShoppingListApp.swift in Sources */,

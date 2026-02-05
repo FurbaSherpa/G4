@@ -1,78 +1,69 @@
-//
-//  ContentView.swift
-//  ShoppingList
-//
-//  Created by Tech on 2026-01-30.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     
-    var products = ["Food 1", "Food 2", "Food 3", "Food 4", "Food 5"]
-    var Cleaningproducts = ["Product 1", "Product2", "Product 3", "Product 4", "Product 5"]
+    @State private var products = ["Food 1", "Food 2", "Food 3", "Food 4", "Food 5"]
+    @State private var cleaningProducts = ["Product 1", "Product 2", "Product 3", "Product 4", "Product 5"]
+    @State private var drinks = ["Drink 1", "Drink 2", "Drink 3", "Drink 4", "Drink 5"]
+    @State private var showingAddProduct = false
+    @State private var searchText = ""
     
+    
+    let themeRed = Color(red: 248/255, green: 95/255, blue: 106/255)
+
     var body: some View {
-        VStack{
-            
-            //Title
-            Text("Shopping List")
-                .font(.title)
-                .fontWeight(.heavy)
+        NavigationStack {
+            List {
                 
-            //Calculate Button
-            Button(action: {
+                Section(header: Text("Food")) {
+                    ForEach(filteredItems(products), id: \.self) { item in
+                        Text(item)
+                    }
+                }
                 
-            }){
-                Text("Calculate")
-                    .fontWeight(.semibold)
-                    .padding()
-                    .background(Color.orange)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                Spacer()
+                Section(header: Text("Cleaning Products")) {
+                    ForEach(filteredItems(cleaningProducts), id: \.self) { item in
+                        Text(item)
+                    }
+                }
+
+                Section(header: Text("Drinks")) {
+                    ForEach(filteredItems(drinks), id: \.self) { item in
+                        Text(item)
+                    }
+                }
             }
-            
-            //Add Button
-            Button(action: {
-                
-            }){
-                Text("Add")
-                    .fontWeight(.semibold)
-                    .padding()
-                    .background(Color.orange)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                        .navigationTitle("Products")
+            .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $searchText, prompt: "Search Products")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Calculator") {
+                    }
+                    .foregroundColor(themeRed)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                         showingAddProduct = true
+                    }) {
+                        Image(systemName: "plus")
+                            .foregroundColor(themeRed)
+                    }
+                }
             }
-            
-            
-            
-            Text("Groceries")
-                .fontWeight(.semibold)
-            //List of Products
-            List(products, id: \.self) { i in
-                //Each row
-                Text(i)
+            .sheet(isPresented: $showingAddProduct){
+                AddProductsView()
             }
-            
-            Text("Cleaning Products")
-                .fontWeight(.semibold)
-            //List of Cleaning Products
-            List(Cleaningproducts, id: \.self) { i in
-                //Each row
-                Text(i)
-            }
-            
-            
-            
             
         }
-        
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    
+    
+    func filteredItems(_ list: [String]) -> [String] {
+        if searchText.isEmpty {
+            return list
+        } else {
+            return list.filter { $0.localizedCaseInsensitiveContains(searchText) }
+        }
     }
 }
