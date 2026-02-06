@@ -63,7 +63,7 @@ struct AddProductsView: View {
                         
                         Spacer()
                         
-                        
+                           
                         Image(systemName: "arrowtriangle.down.fill")
                             .resizable()
                             .frame(width: 12, height: 10)
