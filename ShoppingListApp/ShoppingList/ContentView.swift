@@ -7,7 +7,7 @@ struct ContentView: View {
     @State private var drinks = ["Drink 1", "Drink 2", "Drink 3", "Drink 4", "Drink 5"]
     @State private var showingAddProduct = false
     @State private var searchText = ""
-    
+    @State private var showingCalculator = false
     
     let themeRed = Color(red: 248/255, green: 95/255, blue: 106/255)
 
@@ -39,6 +39,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Calculator") {
+                        showingCalculator = true
                     }
                     .foregroundColor(themeRed)
                 }
@@ -54,6 +55,9 @@ struct ContentView: View {
             .sheet(isPresented: $showingAddProduct){
                 AddProductsView()
             }
+            .sheet(isPresented: $showingCalculator){
+                CalculateView()
+            } 
             
         }
     }
