@@ -10,13 +10,13 @@ import SwiftUI
 struct AddProductsView: View {
     @Environment(\.dismiss) var dismiss
     
+    var categories: [String]
+    var onAdd: (String, String) -> Void
+    
     @State private var productName: String = ""
     @State private var selectedCategory: String = ""
     
     let themeRed = Color(red: 248/255, green: 95/255, blue: 106/255)
-    
-    
-    let categories = ["Food", "Cleaning Products", "Drinks"]
     
     var body: some View {
         NavigationStack{
@@ -79,8 +79,10 @@ struct AddProductsView: View {
                 
                 VStack(spacing: 15) {
                     Button(action: {
-                        
-                        dismiss()
+                        if !productName.isEmpty && !selectedCategory.isEmpty{
+                            onAdd(productName, selectedCategory)
+                            dismiss()
+                        }
                     }) {
                         Text("Add Product")
                             .fontWeight(.bold)
@@ -106,10 +108,9 @@ struct AddProductsView: View {
             .padding(.horizontal, 25)
             .navigationBarHidden(true)
         }
-    }}
-
-struct AddProducts_Preview: PreviewProvider {
-    static var previews: some View {
-        AddProductsView()
     }
+}
+
+#Preview{
+    AddProductsView(categories: ["Food", "Cleaning Products", "Clothes"]) {_, _ in}
 }
