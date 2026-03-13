@@ -3,6 +3,8 @@ import SwiftUI
 struct AddCategoryView: View {
 
     @Environment(\.dismiss) var dismiss
+    
+    @Binding var categories: [String]
 
     @State private var categoryName: String = ""
 
@@ -37,7 +39,9 @@ struct AddCategoryView: View {
             Spacer()
 
             Button(action: {
-                // saving logic will go here later
+                if !categoryName.isEmpty && !categories.contains(categoryName) {
+                    categories.append(categoryName)
+                }
                 dismiss()
             }) {
                 Text("Save Category")
@@ -58,6 +62,6 @@ struct AddCategoryView: View {
 
 struct AddCategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCategoryView()
+        AddCategoryView(categories: .constant(["Food", "Cleaning Products", "Drinks"]))
     }
 }

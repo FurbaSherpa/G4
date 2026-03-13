@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct AddProductsView: View {
+    
     @Environment(\.dismiss) var dismiss
     
-    var categories: [String]
+    @Binding var categories: [String]
     var onAdd: (String, String) -> Void
     
     @State private var productName: String = ""
@@ -19,7 +20,8 @@ struct AddProductsView: View {
     let themeRed = Color(red: 248/255, green: 95/255, blue: 106/255)
     
     var body: some View {
-        NavigationStack{
+        NavigationStack {
+            
             VStack(alignment: .leading, spacing: 30) {
                 
                 Button(action: { dismiss() }) {
@@ -34,22 +36,21 @@ struct AddProductsView: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color(red: 0.1, green: 0.2, blue: 0.3))
                 
-                
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Name")
                         .foregroundColor(themeRed)
                         .fontWeight(.semibold)
+                    
                     TextField("Enter Product name here", text: $productName)
                         .textFieldStyle(PlainTextFieldStyle())
+                    
                     Divider()
                 }
-                
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Category")
                         .foregroundColor(themeRed)
                         .fontWeight(.semibold)
-                    
                     
                     Menu {
                         ForEach(categories, id: \.self) { cat in
@@ -64,22 +65,22 @@ struct AddProductsView: View {
                             
                             Spacer()
                             
-                            
                             Image(systemName: "arrowtriangle.down.fill")
                                 .resizable()
                                 .frame(width: 12, height: 10)
                                 .foregroundColor(.black)
                         }
                     }
+                    
                     Divider()
                 }
                 
                 Spacer()
                 
-                
                 VStack(spacing: 15) {
+                    
                     Button(action: {
-                        if !productName.isEmpty && !selectedCategory.isEmpty{
+                        if !productName.isEmpty && !selectedCategory.isEmpty {
                             onAdd(productName, selectedCategory)
                             dismiss()
                         }
@@ -93,7 +94,7 @@ struct AddProductsView: View {
                             .cornerRadius(10)
                     }
                     
-                    NavigationLink(destination: AddCategoryView()) {
+                    NavigationLink(destination: AddCategoryView(categories: $categories)) {
                         Text("Add new Category")
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -111,6 +112,10 @@ struct AddProductsView: View {
     }
 }
 
-#Preview{
-    AddProductsView(categories: ["Food", "Cleaning Products", "Clothes"]) {_, _ in}
+struct AddProductsView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddProductsView(
+            categories: .constant(["Food", "Cleaning Products", "Clothes"])
+        ) { _, _ in }
+    }
 }
